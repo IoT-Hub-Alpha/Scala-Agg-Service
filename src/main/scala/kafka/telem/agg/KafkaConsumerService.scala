@@ -8,7 +8,6 @@ import play.api.libs.json.Json
 import scala.jdk.CollectionConverters._
 
 class KafkaConsumerService(store: TelemStorage) {
-  // 1. Kafka config
   val props = new Properties()
   props.put("bootstrap.servers", Config.kafkaServer)
   props.put("group.id", Config.consumerGroup)
@@ -17,14 +16,11 @@ class KafkaConsumerService(store: TelemStorage) {
   props.put("auto.offset.reset", "earliest") // or "latest"
   props.put("enable.auto.commit", "true")
 
-  // 2. Create consumer
   private val consumer = new KafkaConsumer[String, String](props)
 
-  // 3. Subscribe to topic
   consumer.subscribe(java.util.Collections.singletonList("telemetry.clean"))
-  println("🚀 Listening to telemetry.clean...")
+  println("Listening to telemetry.clean...")
 
-  // 4. Poll loop
   def run(): Unit = {
     while (true) {
       val records = consumer.poll(Duration.ofMillis(1000))
@@ -42,7 +38,7 @@ class KafkaConsumerService(store: TelemStorage) {
             store.add(timestampMs = System.currentTimeMillis(), device = serial, value = value)
 
           case _ =>
-            println(s"❌ Failed to parse message: ${record.value()}")
+            println(s"Failed to parse message: ${record.value()}")
         }
       }
     }

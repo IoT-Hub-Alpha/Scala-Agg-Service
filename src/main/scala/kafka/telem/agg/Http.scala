@@ -28,10 +28,8 @@ class Http(store: TelemStorage) {
     val response = Json.stringify(json)
     val bytes = response.getBytes(StandardCharsets.UTF_8)
 
-    // 4. Set JSON header
     exchange.getResponseHeaders.add("Content-Type", "application/json")
 
-    // 5. Send response
     exchange.sendResponseHeaders(200, bytes.length)
 
     val os = exchange.getResponseBody
