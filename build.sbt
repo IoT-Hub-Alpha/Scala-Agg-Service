@@ -9,6 +9,8 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "com.typesafe.play" %% "play-json" % "2.10.4",
       "org.apache.kafka" % "kafka-clients" % "3.7.0",
-      "com.typesafe" % "config" % "1.4.3"
-    )
+      "com.typesafe" % "config" % "1.4.3",
+      "org.scalatest" %% "scalatest" % "3.2.19" % Test
+    ),
+    Test / parallelExecution := false
   )
