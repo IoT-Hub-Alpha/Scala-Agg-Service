@@ -4,7 +4,7 @@ A telemetry aggregation service based on scala.
 - Read telemetry from telemetry.raw (kafka)
 - Retain telemetry data for a preset window time (1hour default)
 - Return average/min/max and mean per device per timeframe.
-- Accessable only from inside docker (Access point from teletry API)
+- Accessable only from inside docker (Access point from telemetry API)
 
 Usage: 
 ``` 

@@ -70,7 +70,8 @@ class Http(store: TelemStorage) {
         val count = store.count(windowMs = incWindowMs, deviceLookup = incDevice, nowMs = System.currentTimeMillis())
 
         val json = Json.obj(
-          "average" -> result,
+          "operation" -> operation,
+          "result" -> result,
           "count" -> count
         )
         SendResponse(exchange, json)
